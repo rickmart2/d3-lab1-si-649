@@ -22,6 +22,11 @@ d3.select('#demo-1')
 // TODO: change the text above to add your name
 // TODO: change the color to something else you like // keep in mind color contrast
 
+d3.select('#demo-1')
+    .append('p')
+    .style('color', 'purple')
+    .text('This is Erik!');
+
 
 // Create and append new elements
 d3.select('#demo-1')
@@ -30,6 +35,10 @@ d3.select('#demo-1')
     .style('background-color', 'lightgray');
 
 // TODO: append a new element with your favorite food and style it with a different background color
+d3.select('#demo-1')
+    .append('p')
+    .text('My favorite food is pizza!')
+    .style('background-color', 'lightyellow');
 
 // ============================================================================
 // SECTION 2: DATA BINDING - The Core D3 Pattern 
@@ -61,6 +70,18 @@ d3.select('#demo-2')
 // TODO: sample electricity prices instead of gas and create rectangles instead of circles; make the color of the rectangles green;
 const electricityPrices = sampledData.map(item => parseFloat(item.elec));
 // YOUR CODE GOES HERE 
+d3.select('#demo-2')
+    .append('svg')
+    .attr('width', 400) // Set width of the SVG
+    .attr('height', 100) // Set height of the SVG
+    .selectAll('rect') // Select rectangles (we don't have them yet) - we select rectangles that don't exist yet to tell D3 what kind of elements to create
+    .data(electricityPrices) // Bind the electricityPrices data to the rectangles
+    .join('rect') // Create a rectangle for each data point (this is where the rectangles are created)
+    .attr('x', (d, i) => i*60+10) // Set x position based on index
+    .attr('y', d => 100 - d *100) // Set y position based on electricity price (inverted because SVG y=0 is at the top)
+    .attr('width', 20) // Set a fixed width for the rectangles
+    .attr('height', d => d * 100) // Set height based on electricity price (scaled up for visibility)
+    .attr('fill', 'green'); // Set fill color
 
 // Remember that circle needs radius (r) and center (cx, cy) to create it,
 // while rectangles need x, y, width, and height. You can use the electricity price to determine the height of the rectangle and set a fixed width.
