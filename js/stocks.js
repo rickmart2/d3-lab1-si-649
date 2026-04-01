@@ -137,8 +137,8 @@ svg.append('g')
 
 // Y Axis - Shows prices along the left side
 const yAxis = d3.axisLeft(y)
-    .ticks(d => '$${d}') // Show 10 ticks
-// TODO: Define Y axis, format ticks to show $ sign
+    .ticks(10) // Show 10 ticks
+    .tickFormat(d => `$${d}`); // TODO: Define Y axis, format ticks to show $ sign
 
 svg.append('g')
     .attr('class', 'y-axis')
@@ -184,33 +184,33 @@ stocks.forEach(stock => {
 // TODO: Add a text element for the title
 svg.append('text')
     .attr('class', 'chart-title')
-    .attr('x', '50%')
+    .attr('x', width / 2)
     .attr('y', -10)/* TODO: put the title above the chart */
     .attr('text-anchor', 'middle')
     .style('font-size', '18px')
     .style('font-weight', 'bold')
-    .text('Stock Prices of Biggest US Tech Companies');
+    .text('Stock Closing Prices (2010-2020)');
 
 // X Axis Label
 // TODO: Add a label below the x-axis
 svg.append('text')
     .attr('class', 'x-axis-label')
-    .attr('x', '50%') /* TODO: center the label */
-    .attr('y', 800) /* TODO: put the label below x-xis */
+    .attr('x', width / 2) /* TODO: center the label */
+    .attr('y', 740) /* TODO: put the label below x-xis */
     .attr('text-anchor', 'middle')
     .style('font-size', '14px')
-    .text('Year');
+    .text('Date');
 
 // Y Axis Label
 // TODO: Add a label to the left of the y-axis (rotated)
 svg.append('text')
     .attr('class', 'y-axis-label')
-    .attr('transform', /* TODO: 'rotate(-90)' */)
-    .attr('x', /* TODO: center the label */)
-    .attr('y', /* TODO: put the label to the left of y-axis */)
+    .attr('transform', 'rotate(-90)') /* TODO: 'rotate(-90)' */
+    .attr('x', -height / 2) /* TODO: center the label */
+    .attr('y', -50) /* TODO: put the label to the left of y-axis */
     .attr('text-anchor', 'middle')
     .style('font-size', '14px')
-    .text(/* TODO: add axis label */);
+    .text('Closing Price (USD)');
 
 
 // ============================================================================
@@ -229,20 +229,20 @@ stocks.forEach((stock, i) => {
 
     // TODO: Add a colored line showing the stock's color
     legendRow.append('line')
-        .attr('x1', /* TODO: define x-coordinate of the line starting point */)
-        .attr('y1', /* TODO: define y-coordinate of the line starting point */)
-        .attr('x2', /* TODO: define x-coordinate of the line ending point */)
-        .attr('y2', /* TODO: define y-coordinate of the line ending point */)
-        .attr('stroke', /* TODO: use color variable that we defined above) */)
+        .attr('x1', 0) /* TODO: define x-coordinate of the line starting point */
+        .attr('y1', 10) /* TODO: define y-coordinate of the line starting point */
+        .attr('x2', 20) /* TODO: define x-coordinate of the line ending point */
+        .attr('y2', 10) /* TODO: define y-coordinate of the line ending point */
+        .attr('stroke', color(stock.name)) /* TODO: use color variable that we defined above) */
         .attr('stroke-width', 2);
 
     // TODO: Add text label with the stock name
     legendRow.append('text')
-        .attr('x', /* TODO: define x-coordinate of the text label starting point */)
-        .attr('y', /* TODO: define y-coordinate of the text label starting point */)
+        .attr('x', 30) /* TODO: define x-coordinate of the text label starting point */
+        .attr('y', 15) /* TODO: define y-coordinate of the text label starting point */
         .attr('text-anchor', 'start')
         .style('font-size', '12px')
-        .text(/* TODO: add stock name */);
+        .text(stock.name /* TODO: add stock name */);
 });
 
 
